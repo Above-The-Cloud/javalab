@@ -145,8 +145,8 @@ public class ChessPieceClick extends MouseAdapter {
 	
 	/**
 	 * 交换棋子执行方
-	 * @author 唐伟峰
-	 * 时间：20141121
+	 * @author 汪春雨
+	 * 时间：20171202
 	 */
 	static public void SwitchDoPlayer(){
 		if (ChineseChessMainFrame.DoPlayer == '红'){
