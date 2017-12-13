@@ -8,7 +8,17 @@ import java.io.*;
 import java.sql.*;  
 import sql.*;
 public class LoginFrame {
-	 // 登录界面的GUI组件  
+	
+	ChineseChessApp cca =  null;
+	
+	 public LoginFrame(ChineseChessApp cca) {
+		super();
+		userInfo[0] = new UserInfo();
+		userInfo[1] = new UserInfo();
+		this.cca = cca;
+	}
+
+	// 登录界面的GUI组件  
 	// JDBC 驱动名及数据库 URL
     static final String JDBC_DRIVER = MysqlInfo.JDBC_DRIVER;  
     static final String DB_URL = MysqlInfo.DB_URL;
@@ -33,10 +43,10 @@ public class LoginFrame {
     private JButton signUpButton=new JButton("注册"); 
     
     private JTextField userField1 = new JTextField(20);  
-    private JTextField passField1 = new JTextField(20);
+    private JPasswordField passField1 = new JPasswordField(20);
     
     private JTextField userField2 = new JTextField(20);  
-    private JTextField passField2 = new JTextField(20);
+    private JPasswordField passField2 = new JPasswordField(20);
     
     private JButton startButton = new JButton("开始"); 
     
@@ -49,25 +59,28 @@ public class LoginFrame {
         // 为登录按钮添加事件监听器  
         startButton.addActionListener(e -> {  
             // 登录成功则显示“登录成功”  
-            System.out.println(userField1.getText() +"\t"+passField1.getText()+"\t"+validate(userField1.getText(), passField1.getText()));  
-            System.out.println(userField2.getText() +"\t"+passField2.getText()+"\t"+validate(userField2.getText(), passField2.getText()));  
-            if (validate(userField1.getText(), passField1.getText())&&validate(userField2.getText(), passField2.getText()))  
+            System.out.println(userField1.getText() +"\t"+String.valueOf(passField1.getPassword())+"\t"+validate(userField1.getText(), String.valueOf(passField1.getPassword())));  
+            System.out.println(userField2.getText() +"\t"+String.valueOf(passField2.getPassword())+"\t"+validate(userField2.getText(), String.valueOf(passField2.getPassword())));  
+            if (validate(userField1.getText(), String.valueOf(passField1.getPassword()))&&validate(userField2.getText(), String.valueOf(passField2.getPassword())))  
             {  
                 JOptionPane.showMessageDialog(jf, "登录成功");  
                 
                 jf.setVisible(false); 
-                
+                cca.setVisible(false);
+                ChineseChessMainFrame ccmf = new ChineseChessMainFrame(this);
+    			ccmf.setVisible(true);
                 setUserInfo(userField1.getText(), userField2.getText());
+                
                 
             }  
             // 否则显示“登录失败”  
             else  
             {  	
-            	if((!validate(userField1.getText(), passField1.getText()))&&(!validate(userField2.getText(), passField2.getText())))
+            	if((!validate(userField1.getText(), String.valueOf(passField1.getPassword())))&&(!validate(userField2.getText(), String.valueOf(passField2.getPassword()))))
                 	JOptionPane.showMessageDialog(jf, "登录失败，玩家1,玩家2信息输入错误");  
-            	else if(!validate(userField1.getText(), passField1.getText()))
+            	else if(!validate(userField1.getText(), String.valueOf(passField1.getPassword())))
                 	JOptionPane.showMessageDialog(jf, "登录失败，玩家1信息输入错误");  
-            	else if(!validate(userField2.getText(), passField2.getText()))
+            	else if(!validate(userField2.getText(), String.valueOf(passField2.getPassword())))
                 	JOptionPane.showMessageDialog(jf, "登录失败，玩家2信息输入错误");  
             }  
         });  
@@ -151,6 +164,8 @@ public class LoginFrame {
     }
      
     public void setUserInfo(String user1Name, String user2Name){
+    	
+    	
     	String sql1="select *from user_info where user_name='"+user1Name+"'";  
     	String sql2="select *from user_info where user_name='"+user2Name+"'";
         try{ 
@@ -188,11 +203,11 @@ public class LoginFrame {
     }
     
     //for test
-    public static void main(String[] args) throws Exception  
-    {  
-    	LoginFrame lf = new LoginFrame();
-        lf.init();
-        
-        
-    } 
+//    public static void main(String[] args) throws Exception  
+//    {  
+//    	LoginFrame lf = new LoginFrame();
+//        lf.init();
+//        
+//        
+//    } 
 }

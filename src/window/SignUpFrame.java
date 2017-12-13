@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 import sql.MysqlInfo;
 
@@ -34,7 +35,7 @@ public class SignUpFrame {
     JButton signUpButton=new JButton("зЂВс"); 
     
     JTextField userField1 = new JTextField(20);  
-    JTextField passField1 = new JTextField(20);
+    JPasswordField passField1 = new JPasswordField(20);
     public void init(){
     	class myWindowListener extends WindowAdapter{  
   		  
@@ -61,9 +62,9 @@ public class SignUpFrame {
         jf.setVisible(true);  
         jf.setLocation(600, 400);
         signUpButton.addActionListener(e -> {  
-        	System.out.println(userField1.getText() +"\t"+passField1.getText()+"\t");  
+        	System.out.println(userField1.getText() +"\t"+String.valueOf(passField1.getPassword())+"\t");  
         	try {
-				cheak(userField1.getText(), passField1.getText());
+				cheak(userField1.getText(), String.valueOf(passField1.getPassword()));
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

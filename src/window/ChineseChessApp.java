@@ -101,9 +101,15 @@ public class ChineseChessApp extends JFrame
     {// 单击鼠标时执行的操作  
     	Object source = evt.getSource();
  	   	if(source == Menu1) {
-	    	this.setVisible(false);
-			ChineseChessMainFrame frame = new ChineseChessMainFrame();
-			frame.setVisible(true);
+ 	   		LoginFrame lf = new LoginFrame(this);
+ 	   		try {
+				lf.init();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	//this.setVisible(false);
+			
 			//MP3 BgMusic = new MP3(ChineseChessMainFrame.class.getResource("music\\bgm.mp3").getPath().substring(1));
 			//BgMusic.play();    
  	   	}
