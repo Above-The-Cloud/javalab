@@ -79,10 +79,9 @@ public class LoginFrame {
                 
                 jf.setVisible(false); 
                 cca.setVisible(false);
+                setUserInfo(userField1.getText(), userField2.getText());
                 ChineseChessMainFrame ccmf = new ChineseChessMainFrame(this);
     			ccmf.setVisible(true);
-                setUserInfo(userField1.getText(), userField2.getText());
-                
                 
             }  
             // ∑Ò‘Úœ‘ æ°∞µ«¬º ß∞‹°±  

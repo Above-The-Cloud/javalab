@@ -46,9 +46,13 @@ public class SignUpFrame {
             }  
               
         }
-    	
-    	jf.addWindowListener(new myWindowListener());  
-        jp1.add(new Label("Íæ¼Ò1£º"));  
+    	jf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    	jf.addWindowListener(new WindowAdapter() {
+    	public void windowClosing(WindowEvent e) {
+    		jf.dispose();
+    	}
+    	}); 
+        jp1.add(new Label("Íæ¼Ò  £º"));  
         jp1.add(userField1);  
         jp2.add(new Label("ÃÜÂë  £º"));  
         jp2.add(passField1); 
