@@ -20,6 +20,8 @@ import sql.*;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.ImageObserver;
 
 public class ChineseChessMainFrame extends JFrame {
@@ -57,6 +59,13 @@ public class ChineseChessMainFrame extends JFrame {
 	public ChineseChessMainFrame(LoginFrame lf) {
 		
 		this.userInfo = lf.getUserInfo();
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    	addWindowListener(new WindowAdapter() {
+    	public void windowClosing(WindowEvent e) {
+    		dispose();
+    		lf.backToEntrance();
+    	}
+    	});
 		//数据初始化
 		DataInit();
 		
@@ -69,7 +78,7 @@ public class ChineseChessMainFrame extends JFrame {
 		//设置窗口不可改变大小
 		this.setResizable(false);
 		//设置默认关闭
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		//设置窗口居中
 		this.setLocationRelativeTo(null);
 		
@@ -178,6 +187,7 @@ public class ChineseChessMainFrame extends JFrame {
 					userInfo[1].update("win");
 					userInfo[0].update("lose");
 				}
+				
 			}
 		});
 		Pane1.add(WantLose);

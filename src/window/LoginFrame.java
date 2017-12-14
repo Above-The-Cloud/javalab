@@ -212,7 +212,11 @@ public class LoginFrame {
             e.printStackTrace();  
         }  
     }
-    
+    public void backToEntrance()
+    {
+    	this.jf.dispose();
+    	cca.setVisible(true);
+    }
     //for test
 //    public static void main(String[] args) throws Exception  
 //    {  
