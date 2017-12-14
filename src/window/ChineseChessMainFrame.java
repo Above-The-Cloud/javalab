@@ -57,8 +57,6 @@ public class ChineseChessMainFrame extends JFrame {
 	public ChineseChessMainFrame(LoginFrame lf) {
 		
 		this.userInfo = lf.getUserInfo();
-		System.out.println(userInfo[0].getUserName() + "\t" + userInfo[0].getNumWin());
-		System.out.println(userInfo[1].getUserName() + "\t" + userInfo[1].getNumWin());
 		//数据初始化
 		DataInit();
 		
