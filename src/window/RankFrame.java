@@ -70,7 +70,7 @@ public class RankFrame {
             System.out.println(" 实例化Statement对...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM user_info";
+            sql = "SELECT user_id,user_name,user_password,num_win,num_lose,num_peace,num_win*1000/(num_win+num_lose+num_peace) as rank FROM user_info order by rank desc;";
             ResultSet rs = stmt.executeQuery(sql);
         
             // 展开结果集数据库
@@ -99,6 +99,7 @@ public class RankFrame {
                 System.out.print(", peace: " + num_peace);
                 System.out.print("\n");
             }
+            
             // 完成后关闭
             rs.close();
             stmt.close();

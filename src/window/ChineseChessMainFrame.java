@@ -147,7 +147,6 @@ public class ChineseChessMainFrame extends JFrame {
 		//添加重新开始按钮
 		DiyButton AllReset = new DiyButton("Image\\ButtonAllReset(0).png","Image\\ButtonAllReset(1).png");
 		AllReset.setBounds(780, 610, 326, 115);
-		MyCanvas.add(AllReset);
 		AllReset.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent arg0){
@@ -158,6 +157,7 @@ public class ChineseChessMainFrame extends JFrame {
 				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
 			}
 		});
+		//MyCanvas.add(AllReset);
 		Pane1.add(AllReset);
 		
 		//添加时间标签
@@ -191,6 +191,7 @@ public class ChineseChessMainFrame extends JFrame {
 				
 			}
 		});
+		//MyCanvas.add(WantLose);
 		Pane1.add(WantLose);
 		
 		//添加平局按钮
@@ -204,6 +205,7 @@ public class ChineseChessMainFrame extends JFrame {
 				userInfo[1].update("peace");
 			}
 		});
+		//MyCanvas.add(WantEqual);
 		Pane1.add(WantEqual);
 		
 		//添加悔棋按钮
