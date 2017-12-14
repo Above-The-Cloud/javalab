@@ -13,6 +13,7 @@ import Audio.MP3;
 import defaultSet.DefaultSet;
 import window.ChessBoarderCanvas;
 import window.ChineseChessMainFrame;
+import sql.*;
 
 /**
  * 
@@ -20,6 +21,11 @@ import window.ChineseChessMainFrame;
  *时间：20171129
  */
 public class ChessPieceClick extends MouseAdapter {
+	UserInfo[] userInfo = new UserInfo[2];
+	public ChessPieceClick(UserInfo[] userInfo)
+	{
+		this.userInfo = userInfo;
+	}
 	@Override
 	public void mouseClicked(MouseEvent arg0){
 		MP3 DoPieceSound = new MP3(ChineseChessMainFrame.class.getResource("/music/dopiece.wav").getPath().substring(1),false);
@@ -71,12 +77,12 @@ public class ChessPieceClick extends MouseAdapter {
 								char Winner = ChineseChessMainFrame.MyBoarder.Winner();
 								if (Winner == '红'){
 									WinSound.play();
-									((ChessBoarderCanvas)arg0.getSource()).SendWinner('红');
+									((ChessBoarderCanvas)arg0.getSource()).SendWinner('红', userInfo);
 									ChineseChessMainFrame.InfBoard.AddLog("红方获得胜利!");
 								}
 								else if (Winner == '黑'){
 									WinSound.play();
-									((ChessBoarderCanvas)arg0.getSource()).SendWinner('黑');
+									((ChessBoarderCanvas)arg0.getSource()).SendWinner('黑', userInfo);
 									ChineseChessMainFrame.InfBoard.AddLog("黑方获得胜利!");
 								}
 								else{
@@ -112,12 +118,12 @@ public class ChessPieceClick extends MouseAdapter {
 									char Winner = ChineseChessMainFrame.MyBoarder.Winner();
 									if (Winner == '红'){
 										WinSound.play();
-										((ChessBoarderCanvas)arg0.getSource()).SendWinner('红');
+										((ChessBoarderCanvas)arg0.getSource()).SendWinner('红', userInfo);
 										ChineseChessMainFrame.InfBoard.AddLog("红方获得胜利!");
 									}
 									else if (Winner == '黑'){
 										WinSound.play();
-										((ChessBoarderCanvas)arg0.getSource()).SendWinner('黑');
+										((ChessBoarderCanvas)arg0.getSource()).SendWinner('黑', userInfo);
 										ChineseChessMainFrame.InfBoard.AddLog("黑方获得胜利!");
 									}
 									else{

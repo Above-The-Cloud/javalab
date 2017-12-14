@@ -32,7 +32,7 @@ public class ChineseChessApp extends JFrame
 		setBounds(0, 0, 1366, 768);
 		setLayout(null);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); 
 		addBackgroundImage("imageLibary\\background.png");
 		
@@ -188,7 +188,6 @@ public class ChineseChessApp extends JFrame
 					
 					ChineseChessApp frame = new ChineseChessApp();
 					frame.setVisible(true);
-					frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 					MP3 BgMusic = new MP3(ChineseChessMainFrame.class.getResource("/music/bgm.mp3").getPath().substring(1));
 					BgMusic.play();
 				} catch (Exception e) {

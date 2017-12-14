@@ -51,7 +51,7 @@ public class ChineseChessMainFrame extends JFrame {
 	static public ChessBoarder MyBoarder;
 	
 	ChessBoarderCanvas MyCanvas;
-	UserInfo[] userInfo = new UserInfo[2];
+	public UserInfo[] userInfo = new UserInfo[2];
 
 
 	public ChineseChessMainFrame(LoginFrame lf) {
@@ -125,7 +125,7 @@ public class ChineseChessMainFrame extends JFrame {
 		//为Canvas传递数据
 		MyCanvas.SendData(this.MyBoarder, Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/background.png")), DefaultSet.CanvasPosX, DefaultSet.CanvasPosY, DefaultSet.CanvasPosX+661, DefaultSet.CanvasPosY+728);
 		MyCanvas.repaint();
-		MyCanvas.addMouseListener(new ChessPieceClick());
+		MyCanvas.addMouseListener(new ChessPieceClick(userInfo));
 		Pane1.add(MyCanvas);
 		
 		//对Pane1添加信息栏
@@ -144,7 +144,7 @@ public class ChineseChessMainFrame extends JFrame {
 				DataInit();
 				InfBoard.Clear();
 				InfBoard.AddLog("红方执子");
-				MyCanvas.SendWinner('无');
+				MyCanvas.SendWinner('无', userInfo);
 				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
 			}
 		});
@@ -165,8 +165,19 @@ public class ChineseChessMainFrame extends JFrame {
 		WantLose.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent arg0){
-				if(DoPlayer == '黑')MyCanvas.SendWinner('红');
-				else MyCanvas.SendWinner('黑');
+				if(DoPlayer == '黑')
+				{
+					MyCanvas.SendWinner('红', userInfo);
+					userInfo[0].update("win");
+					userInfo[1].update("lose");
+				}
+					
+				else 
+				{
+					MyCanvas.SendWinner('黑', userInfo);
+					userInfo[1].update("win");
+					userInfo[0].update("lose");
+				}
 			}
 		});
 		Pane1.add(WantLose);
@@ -177,7 +188,9 @@ public class ChineseChessMainFrame extends JFrame {
 		WantEqual.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent arg0){
-				MyCanvas.SendWinner('二');
+				MyCanvas.SendWinner('二', userInfo);
+				userInfo[0].update("peace");
+				userInfo[1].update("peace");
 			}
 		});
 		Pane1.add(WantEqual);
@@ -188,7 +201,7 @@ public class ChineseChessMainFrame extends JFrame {
 		WantBack.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent arg0){
-
+					
 			}
 		});
 		Pane1.add(WantBack);

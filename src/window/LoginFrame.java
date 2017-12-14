@@ -9,7 +9,7 @@ import java.sql.*;
 import sql.*;
 public class LoginFrame {
 	
-	ChineseChessApp cca =  null;
+	public ChineseChessApp cca =  null;
 	
 	 public LoginFrame(ChineseChessApp cca) {
 		super();
@@ -55,13 +55,25 @@ public class LoginFrame {
          
         // 加载驱动  
     	
+    	jf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    	jf.addWindowListener(new WindowAdapter() {
+    	public void windowClosing(WindowEvent e) {
+    		jf.dispose();
+    		cca.setVisible(true);
+    	}
+    	});
         Class.forName("com.mysql.jdbc.Driver");  
         // 为登录按钮添加事件监听器  
         startButton.addActionListener(e -> {  
             // 登录成功则显示“登录成功”  
             System.out.println(userField1.getText() +"\t"+String.valueOf(passField1.getPassword())+"\t"+validate(userField1.getText(), String.valueOf(passField1.getPassword())));  
-            System.out.println(userField2.getText() +"\t"+String.valueOf(passField2.getPassword())+"\t"+validate(userField2.getText(), String.valueOf(passField2.getPassword())));  
-            if (validate(userField1.getText(), String.valueOf(passField1.getPassword()))&&validate(userField2.getText(), String.valueOf(passField2.getPassword())))  
+            System.out.println(userField2.getText() +"\t"+String.valueOf(passField2.getPassword())+"\t"+validate(userField2.getText(), String.valueOf(passField2.getPassword()))); 
+            
+            if(userField1.getText().equals(userField2.getText()))
+            {
+            	JOptionPane.showMessageDialog(jf, "玩家1和玩家2不可相同！"); 
+            }
+            else if (validate(userField1.getText(), String.valueOf(passField1.getPassword()))&&validate(userField2.getText(), String.valueOf(passField2.getPassword())))  
             {  
                 JOptionPane.showMessageDialog(jf, "登录成功");  
                 
@@ -86,7 +98,7 @@ public class LoginFrame {
         });  
         signUpButton.addActionListener(e -> {  
             // 注册
-            System.out.println(userField1.getText() +"\t"+passField1.getText()+"\t"+validate(userField1.getText(), passField1.getText()));  
+            System.out.println(userField1.getText() +"\t"+String.valueOf(passField1.getPassword())+"\t"+validate(userField1.getText(), String.valueOf(passField1.getPassword())));  
             try {  
             	
             	//jf.setVisible(false); 
@@ -109,7 +121,6 @@ public class LoginFrame {
               
         }  
         
-        jf.addWindowListener(new myWindowListener());  
         jp1.add(new Label("玩家1："));  
         jp1.add(userField1);  
         jp2.add(new Label("密码  ："));  
@@ -122,7 +133,7 @@ public class LoginFrame {
         bottomButton.add(signUpButton);  
         bottomButton.add(startButton); 
         jf.setLayout(new GridLayout(6,1,1,1));
-        
+        jf.setLocationRelativeTo(null);
   
         jf.add(jp1);  
         jf.add(jp2);

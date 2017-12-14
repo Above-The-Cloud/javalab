@@ -19,8 +19,8 @@ public class ChessBoarder {
 	
 	/**
 	 * 初始化棋盘
-	 * @author 孔胤栋
-	 * 时间：20141113
+	 * @author 汪春雨
+	 * 时间：20171203
 	 */
 	public ChessBoarder(){
 		//设2个框的初值
@@ -92,8 +92,8 @@ public class ChessBoarder {
 	 * @param src 原位置
 	 * @param des 目标位置
 	 * @return 移动成功返回true，否则返回false
-	 * @author 孔胤栋
-	 * 时间：20141118
+	 * @author 汪春雨
+	 * 时间：20171207
 	 */
 	public boolean PieceMove(Point src,Point des){
 		//test
@@ -426,8 +426,8 @@ public class ChessBoarder {
 	 * @param src 原位置
 	 * @param des 目标位置
 	 * @return 移动成功返回true，否则返回false
-	 * @author 孔胤栋
-	 * 时间：20141118
+	 * @author 汪春雨
+	 * 时间：20171210
 	 */
 	public boolean PieceEat(Point src,Point des){
 		if (MyPieces[src.y][src.x] == null){
@@ -482,7 +482,7 @@ public class ChessBoarder {
 	 * @param a点a
 	 * @param b点b
 	 * @return ab间距离
-	 * @author 孔胤栋
+	 * @author 汪春雨
 	 */
 	public float Distance(Point a,Point b){
 		System.out.println((float)Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
@@ -494,7 +494,7 @@ public class ChessBoarder {
 	 * @param a点a
 	 * @param b点b
 	 * @return ab间隔了多少棋子
-	 * @author 孔胤栋
+	 * @author 汪春雨
 	 */
 	public int IsBlock(Point a,Point b){
 		int n = 0;
@@ -535,7 +535,7 @@ public class ChessBoarder {
 	/**
 	 * 得到胜利方
 	 * @return 胜利方，红，黑，无
-	 * @author 孔胤栋
+	 * @author 汪春雨
 	 */
 	public char Winner(){
 		//判断将是否存在

@@ -1,5 +1,5 @@
 package window;
-
+import sql.*;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -12,6 +12,7 @@ import chessBoard.ChessBoarder;
 import defaultSet.DefaultSet;
 
 public class ChessBoarderCanvas extends JPanel{
+	UserInfo[] userInfo = new UserInfo[2];
 	ChessBoarder MyChessBoarder;
 	//CanvasµÄ±³¾°Í¼Æ¬
 	Image BgImage;
@@ -46,7 +47,8 @@ public class ChessBoarderCanvas extends JPanel{
 		return 0;
 	}
 	
-	public void SendWinner(char a){
+	public void SendWinner(char a, UserInfo[] userInfo){
+		this.userInfo = userInfo; 
 		this.Winner = a;
 	}
 	
@@ -97,12 +99,15 @@ public class ChessBoarderCanvas extends JPanel{
 		//»æÖÆÊ¤ÀûÍ¼Æ¬
 		if (this.Winner == 'ºì'){
 			g.drawImage(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/red-win.png")), 50, 270,559, 132, this);
+			
 		}
-		else if (this.Winner == 'ºÚ'){
+		else if (this.Winner == 'ºÚ'){	
 			g.drawImage(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/black-win.png")), 50, 270,559, 132, this);
+			
 		}
 		else if (this.Winner == '¶þ'){
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Image\\both-win.png"), 50, 270,559, 132, this);
+			
 		}
 		//gg.drawImage(BImage, 0, 0, null);
 	}

@@ -9,8 +9,8 @@ import window.ChineseChessMainFrame;
 
 /**
  * 棋盘棋子类
- * @author 孔胤栋
- * 时间：20141113
+ * @author 汪春雨
+ * 时间：20171213
  */
 public class ChessPieces {
 	public String name;
