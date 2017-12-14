@@ -8,6 +8,6 @@
 	<classpathentry kind="lib" path="JMF/mp3plugin.jar"/>
 	<classpathentry kind="lib" path="JMF/multiplayer.jar"/>
 	<classpathentry kind="lib" path="JMF/sound.jar"/>
-	<classpathentry kind="lib" path="C:/Users/yiwan/Downloads/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="JMF/mysql-connector-java-5.1.39-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

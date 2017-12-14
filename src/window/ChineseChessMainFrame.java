@@ -147,6 +147,7 @@ public class ChineseChessMainFrame extends JFrame {
 		//添加重新开始按钮
 		DiyButton AllReset = new DiyButton("Image\\ButtonAllReset(0).png","Image\\ButtonAllReset(1).png");
 		AllReset.setBounds(780, 610, 326, 115);
+		MyCanvas.add(AllReset);
 		AllReset.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent arg0){
