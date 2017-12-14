@@ -68,13 +68,28 @@ $user_password = '123456';
 $user_name = '壹汪春雨';
 //$submission_time = '2017-12-03 12:00:00';
 $submission_time = date("Y-m-d h:m:s");
-$num_win = 0;
-$num_lose = 0;
+$num_win = 5;
+$num_lose = 3;
 $num_peace = 0;
 $sql = "INSERT INTO user_info ".
         "(user_name, user_password, num_win, num_lose, num_peace, submission_time)".
         "VALUES".
         "('$user_name', '$user_password', '$num_win', '$num_lose', '$num_peace', '$submission_time')";
+$retval = mysqli_query( $conn, $sql );
+$sql = "INSERT INTO user_info ".
+        "(user_name, user_password, num_win, num_lose, num_peace, submission_time)".
+        "VALUES".
+        "('wcy', '123456', 10, 3, 1, '$submission_time')";
+$retval = mysqli_query( $conn, $sql );
+$sql = "INSERT INTO user_info ".
+        "(user_name, user_password, num_win, num_lose, num_peace, submission_time)".
+        "VALUES".
+        "('cqj', 123456, 7, 3, 2, current_date())";
+$retval = mysqli_query( $conn, $sql );
+$sql = "INSERT INTO user_info ".
+        "(user_name, user_password, num_win, num_lose, num_peace, submission_time)".
+        "VALUES".
+        "('cmy', '123456', 7, 1, 2, current_date())";
 $retval = mysqli_query( $conn, $sql );
 if(! $retval )
 {

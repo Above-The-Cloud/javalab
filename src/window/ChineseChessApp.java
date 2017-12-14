@@ -113,6 +113,11 @@ public class ChineseChessApp extends JFrame
 			//MP3 BgMusic = new MP3(ChineseChessMainFrame.class.getResource("music\\bgm.mp3").getPath().substring(1));
 			//BgMusic.play();    
  	   	}
+ 	   	if(source == Menu3)
+ 	   	{
+ 	   		RankFrame rf = new RankFrame();
+ 	   		
+ 	   	}
  	   	if(source == Menu4) {
  	   		AboutDialog dialog = new AboutDialog(this);
  	   		dialog.setVisible(true);
@@ -183,6 +188,7 @@ public class ChineseChessApp extends JFrame
 					
 					ChineseChessApp frame = new ChineseChessApp();
 					frame.setVisible(true);
+					frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 					MP3 BgMusic = new MP3(ChineseChessMainFrame.class.getResource("/music/bgm.mp3").getPath().substring(1));
 					BgMusic.play();
 				} catch (Exception e) {
