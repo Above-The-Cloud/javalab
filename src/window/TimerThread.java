@@ -76,7 +76,7 @@ public class TimerThread extends Thread{
 			}
 			else{
 				desLabel1.setText("");
-				desLabel1.setText("");
+				desLabel2.setText("");
 			}
 		}
 	}

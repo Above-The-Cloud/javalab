@@ -110,11 +110,11 @@ public class ChineseChessMainFrame extends JFrame {
 		Pane1.setOpaque(false);
 		Pane1.setVisible(true);
 		Pane1.setLayout(null);
-		Pane2.setBounds(750,70,400,322);
+		Pane2.setBounds(800,370,400,322);
 		Pane2.setOpaque(false);
 		Pane2.setVisible(true);
 		Pane2.setLayout(null);
-		Pane3.setBounds(800,370,400,322);
+		Pane3.setBounds(750,70,400,322);
 		Pane3.setOpaque(false);
 		Pane3.setVisible(true);
 		Pane3.setLayout(null);
