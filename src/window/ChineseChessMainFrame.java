@@ -225,17 +225,15 @@ public class ChineseChessMainFrame extends JFrame {
 				if(DoPlayer == 'ºÚ')
 				{
 					MyCanvas.SendWinner('ºì', userInfo);
-					//userInfo[0].update("win");
-					//userInfo[1].update("lose");
 				}
 					
 				else 
 				{
 					MyCanvas.SendWinner('ºÚ', userInfo);
-					//userInfo[1].update("win");
-					//userInfo[0].update("lose");
 				}
-				
+				MyCanvas.repaint();
+				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
+				System.out.println("repaint done");
 			}
 		});
 		Pane1.add(WantLose);
@@ -247,8 +245,9 @@ public class ChineseChessMainFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0){
 				MyCanvas.SendWinner('¶þ', userInfo);
-				//userInfo[0].update("peace");
-				//userInfo[1].update("peace");
+				MyCanvas.repaint();
+				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
+				System.out.println("repaint done");
 			}
 		});
 		Pane1.add(WantEqual);
