@@ -203,11 +203,15 @@ public class ChineseChessMainFrame extends JFrame {
 		Pane1.add(AllReset);
 		
 		//添加时间标签
-		JLabel TimerLabel = new JLabel();
-		TimerLabel.setBounds(1030, 570, 100, 50);
-		TimerLabel.setFont(new Font("华文行楷",Font.CENTER_BASELINE,28));
-		Pane1.add(TimerLabel);
-		TimerThread MyTimerThread = new TimerThread(TimerLabel);
+		JLabel TimerLabel1 = new JLabel();
+		TimerLabel1.setBounds(1000, 590, 100, 50);
+		TimerLabel1.setFont(new Font("华文行楷",Font.CENTER_BASELINE,28));
+		Pane1.add(TimerLabel1);
+		JLabel TimerLabel12 = new JLabel();
+		TimerLabel12.setBounds(950, 290, 100, 50);
+		TimerLabel12.setFont(new Font("华文行楷",Font.CENTER_BASELINE,28));
+		Pane1.add(TimerLabel12);
+		TimerThread MyTimerThread = new TimerThread(TimerLabel1, TimerLabel12);
 		MyTimerThread.start();
 		
 		
