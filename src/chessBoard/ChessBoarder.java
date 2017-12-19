@@ -6,6 +6,14 @@ import window.ChineseChessMainFrame;
 
 public class ChessBoarder {
 	/*
+	 * 悔棋专用数据区
+	 * 
+	 */
+	public Point presrc;
+	public Point predest;
+	public ChessPieces prepiece;
+	public boolean available = false;
+	/*
 	 * 9列10行的棋子数组
 	 * null表示当前位置棋盘没有棋子
 	 */
@@ -101,7 +109,10 @@ public class ChessBoarder {
 		MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
 		MyPieces[src.y][src.x] = null;
 		*/
-		
+		presrc = src;
+		predest = des;
+		available = true;
+		prepiece = MyPieces[des.y][des.x];
 		if (MyPieces[src.y][src.x] == null){
 			//源位置没有棋子，移动失败
 			return false;
@@ -589,5 +600,19 @@ public class ChessBoarder {
 		}
 		
 		return '无';
+	}
+	public boolean prestep()
+	{
+		if(available)
+		{
+			MyPieces[presrc.y][presrc.x] = MyPieces[predest.y][predest.x];
+			MyPieces[predest.y][predest.x] = prepiece;
+			available = false;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

@@ -8,6 +8,7 @@ import java.awt.Point;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
@@ -16,7 +17,7 @@ import chessBoard.ChessBoarder;
 import defaultSet.DefaultSet;
 import window.LabelEvent.ChessPieceClick;
 import sql.*;
-
+import java.util.*;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -258,7 +259,18 @@ public class ChineseChessMainFrame extends JFrame {
 		WantBack.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent arg0){
-					
+					if(ChineseChessMainFrame.MyBoarder.prestep())
+					{
+						ChessPieceClick.SwitchDoPlayer();
+						MyCanvas.repaint();
+						MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
+						System.out.println("repaint done");
+						JOptionPane.showMessageDialog(ChineseChessMainFrame.this, "»ÚÆå³É¹¦£¡");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(ChineseChessMainFrame.this, "»ÚÆåÊ§°Ü£¡");
+					}
 			}
 		});
 		Pane1.add(WantBack);
