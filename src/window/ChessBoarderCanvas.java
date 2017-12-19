@@ -50,6 +50,19 @@ public class ChessBoarderCanvas extends JPanel{
 	public void SendWinner(char a, UserInfo[] userInfo){
 		this.userInfo = userInfo; 
 		this.Winner = a;
+		switch(a)
+		{
+		case 'ºì': userInfo[0].update("win");
+		userInfo[1].update("lose");
+		break;
+		case 'ºÚ': userInfo[1].update("win");
+		userInfo[0].update("lose");
+		break;
+		case '¶þ': userInfo[1].update("peace");
+		userInfo[0].update("peace");
+		break;
+		default: break;
+		}
 	}
 	
 	@Override

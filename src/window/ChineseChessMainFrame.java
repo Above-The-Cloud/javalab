@@ -139,7 +139,7 @@ public class ChineseChessMainFrame extends JFrame {
 		//对Pane1添加信息栏
 		InfBoard = new InformationBoard();
 		InfBoard.setBounds(1100, 50, 394, 481);
-		Pane1.add(InfBoard);
+		//Pane1.add(InfBoard);
 		
 		InfBoard.AddLog("红方执子");
 		//添加用户信息栏1
@@ -220,15 +220,15 @@ public class ChineseChessMainFrame extends JFrame {
 				if(DoPlayer == '黑')
 				{
 					MyCanvas.SendWinner('红', userInfo);
-					userInfo[0].update("win");
-					userInfo[1].update("lose");
+					//userInfo[0].update("win");
+					//userInfo[1].update("lose");
 				}
 					
 				else 
 				{
 					MyCanvas.SendWinner('黑', userInfo);
-					userInfo[1].update("win");
-					userInfo[0].update("lose");
+					//userInfo[1].update("win");
+					//userInfo[0].update("lose");
 				}
 				
 			}
@@ -242,8 +242,8 @@ public class ChineseChessMainFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0){
 				MyCanvas.SendWinner('二', userInfo);
-				userInfo[0].update("peace");
-				userInfo[1].update("peace");
+				//userInfo[0].update("peace");
+				//userInfo[1].update("peace");
 			}
 		});
 		Pane1.add(WantEqual);

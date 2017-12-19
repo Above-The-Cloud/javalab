@@ -32,7 +32,7 @@ public class ChineseChessApp extends JFrame
 		setBounds(0, 0, 1366, 768);
 		setLayout(null);
 		setResizable(false);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); 
 		addBackgroundImage("imageLibary\\background.png");
 		
