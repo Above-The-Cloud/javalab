@@ -13,6 +13,14 @@ public class ChessBoarder {
 	public Point predest;
 	public ChessPieces prepiece;
 	public boolean available = false;
+	
+	/*
+	 * 
+	 * 双方将帅的位置
+	 * 
+	 */
+	public Point redking;
+	public Point blackking;
 	/*
 	 * 9列10行的棋子数组
 	 * null表示当前位置棋盘没有棋子
@@ -614,5 +622,9 @@ public class ChessBoarder {
 		{
 			return false;
 		}
+	}
+	public boolean jiangjun()
+	{
+		return true;
 	}
 }
