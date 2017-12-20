@@ -27,6 +27,16 @@ import java.awt.image.ImageObserver;
 
 public class ChineseChessMainFrame extends JFrame {
 
+	/*
+	 * 
+	 * 战局记录专用数据结构
+	 * 
+	 */
+	public static ArrayList<MoveStep> record = new ArrayList<MoveStep>();
+	public static void recordAdd(MoveStep ms)
+	{
+		record.add(ms);
+	}
 	private JPanel contentPane;
 	private JPanel Pane1;
 	private HomePanel Pane2;
@@ -52,9 +62,10 @@ public class ChineseChessMainFrame extends JFrame {
 	static public char DoPlayer = '红';
 	//棋盘数据
 	static public ChessBoarder MyBoarder;
+
 	
-	ChessBoarderCanvas MyCanvas;
-	public UserInfo[] userInfo = new UserInfo[2];
+	public static ChessBoarderCanvas MyCanvas;
+	public static UserInfo[] userInfo = new UserInfo[2];
 
 
 	public ChineseChessMainFrame(LoginFrame lf) {
@@ -199,6 +210,7 @@ public class ChineseChessMainFrame extends JFrame {
 				InfBoard.AddLog("红方执子");
 				MyCanvas.SendWinner('无', userInfo);
 				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
+				record.clear();
 			}
 		});
 		Pane1.add(AllReset);
@@ -234,6 +246,7 @@ public class ChineseChessMainFrame extends JFrame {
 				MyCanvas.repaint();
 				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
 				System.out.println("repaint done");
+				ChineseChessMainFrame.reDisplay();
 			}
 		});
 		Pane1.add(WantLose);
@@ -248,6 +261,7 @@ public class ChineseChessMainFrame extends JFrame {
 				MyCanvas.repaint();
 				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
 				System.out.println("repaint done");
+				ChineseChessMainFrame.reDisplay();
 			}
 		});
 		Pane1.add(WantEqual);
@@ -280,7 +294,7 @@ public class ChineseChessMainFrame extends JFrame {
 	 * @author 汪春雨
 	 * 时间：20171201
 	 */
-	public void DataInit(){
+	public static void DataInit(){
 		MenuMode = 0;
 		DoPlayer = '红';
 		MyBoarder = new ChessBoarder();
@@ -288,5 +302,43 @@ public class ChineseChessMainFrame extends JFrame {
 		System.out.println(userInfo[0].getUserName() + "\t" + userInfo[0].getNumWin());
 		System.out.println(userInfo[1].getUserName() + "\t" + userInfo[1].getNumWin());
 	}
-
+	/*
+	 * 战局重播
+	 * 
+	 */
+	public static void reDisplay()
+	{
+		int n=JOptionPane.showConfirmDialog(null, "是否战局重播？","标题",JOptionPane.YES_NO_CANCEL_OPTION);
+		if(n==0)  //战局重播
+		{
+			DataInit();
+			InfBoard.Clear();
+			MyCanvas.SendWinner('无', userInfo);
+			MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			for(MoveStep step : record)
+			{
+				ChineseChessMainFrame.MyBoarder.MyPieces[step.des.y][step.des.x] = ChineseChessMainFrame.MyBoarder.MyPieces[step.src.y][step.src.x];
+				ChineseChessMainFrame.MyBoarder.MyPieces[step.src.y][step.src.x] = null;
+				MyCanvas.repaint();
+				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
+				System.out.println("repaint done");
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		else
+		{
+			return ;
+		}
+	}
 }

@@ -113,6 +113,7 @@ public class ChessBoarderCanvas extends JPanel{
 		if (this.Winner == 'ºì'){
 			g.drawImage(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/red-win.png")), 50, 270,559, 132, this);
 			
+			
 		}
 		else if (this.Winner == 'ºÚ'){	
 			g.drawImage(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/black-win.png")), 50, 270,559, 132, this);

@@ -1,12 +1,16 @@
 package chessBoard;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import window.ChineseChessMainFrame;
+import window.MoveStep;
 
 public class ChessBoarder {
+	
 	/*
 	 * 悔棋专用数据区
 	 * 
@@ -655,6 +659,7 @@ public class ChessBoarder {
 			MyPieces[presrc.y][presrc.x] = MyPieces[predest.y][predest.x];
 			MyPieces[predest.y][predest.x] = prepiece;
 			available = false;
+			ChineseChessMainFrame.record.remove(ChineseChessMainFrame.record.size()-1);
 			return true;
 		}
 		else

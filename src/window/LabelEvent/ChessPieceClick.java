@@ -14,6 +14,7 @@ import Audio.MP3;
 import defaultSet.DefaultSet;
 import window.ChessBoarderCanvas;
 import window.ChineseChessMainFrame;
+import window.MoveStep;
 import sql.*;
 
 /**
@@ -24,6 +25,7 @@ import sql.*;
 public class ChessPieceClick extends MouseAdapter {
 	UserInfo[] userInfo = new UserInfo[2];
 	public boolean jiangjun = false;
+	public boolean redisplay = false;
 	public ChessPieceClick(UserInfo[] userInfo)
 	{
 		this.userInfo = userInfo;
@@ -76,17 +78,21 @@ public class ChessPieceClick extends MouseAdapter {
 								//棋子可以移动
 								DoPieceSound.play();
 								jiangjun = ChineseChessMainFrame.MyBoarder.jiangjun();
+								MoveStep ms = new MoveStep(ChineseChessMainFrame.MyBoarder.p1, ChineseChessMainFrame.MyBoarder.p2);
+								ChineseChessMainFrame.recordAdd(ms);
 								System.out.println("棋子可以移动");
 								char Winner = ChineseChessMainFrame.MyBoarder.Winner();
 								if (Winner == '红'){
 									WinSound.play();
 									((ChessBoarderCanvas)arg0.getSource()).SendWinner('红', userInfo);
 									ChineseChessMainFrame.InfBoard.AddLog("红方获得胜利!");
+									redisplay = true;
 								}
 								else if (Winner == '黑'){
 									WinSound.play();
 									((ChessBoarderCanvas)arg0.getSource()).SendWinner('黑', userInfo);
 									ChineseChessMainFrame.InfBoard.AddLog("黑方获得胜利!");
+									redisplay = true;
 								}
 								else{
 									ChineseChessMainFrame.MyBoarder.p1 = null;
@@ -119,16 +125,20 @@ public class ChessPieceClick extends MouseAdapter {
 									DoPieceSound.play();
 									System.out.println("棋子可以吃");
 									jiangjun = ChineseChessMainFrame.MyBoarder.jiangjun();
+									MoveStep ms = new MoveStep(ChineseChessMainFrame.MyBoarder.p1, ChineseChessMainFrame.MyBoarder.p2);
+									ChineseChessMainFrame.recordAdd(ms);
 									char Winner = ChineseChessMainFrame.MyBoarder.Winner();
 									if (Winner == '红'){
 										WinSound.play();
 										((ChessBoarderCanvas)arg0.getSource()).SendWinner('红', userInfo);
 										ChineseChessMainFrame.InfBoard.AddLog("红方获得胜利!");
+										redisplay = true;
 									}
 									else if (Winner == '黑'){
 										WinSound.play();
 										((ChessBoarderCanvas)arg0.getSource()).SendWinner('黑', userInfo);
 										ChineseChessMainFrame.InfBoard.AddLog("黑方获得胜利!");
+										redisplay = true;
 									}
 									else{
 										ChineseChessMainFrame.MyBoarder.p1 = null;
@@ -155,6 +165,11 @@ public class ChessPieceClick extends MouseAdapter {
 		{
 			JOptionPane.showMessageDialog(null, "将军！"); 
 			jiangjun = false;
+		}
+		if(redisplay)
+		{
+			ChineseChessMainFrame.reDisplay();
+			redisplay = false;
 		}
 	}
 	
