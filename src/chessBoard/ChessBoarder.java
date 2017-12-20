@@ -2,6 +2,8 @@ package chessBoard;
 
 import java.awt.Point;
 
+import javax.swing.JOptionPane;
+
 import window.ChineseChessMainFrame;
 
 public class ChessBoarder {
@@ -13,14 +15,14 @@ public class ChessBoarder {
 	public Point predest;
 	public ChessPieces prepiece;
 	public boolean available = false;
-	
+	public boolean testeating = false;
 	/*
 	 * 
 	 * 双方将帅的位置
 	 * 
 	 */
-	public Point redking;
-	public Point blackking;
+	public Point redking = new Point(4,9);
+	public Point blackking = new Point(4,0);
 	/*
 	 * 9列10行的棋子数组
 	 * null表示当前位置棋盘没有棋子
@@ -117,10 +119,13 @@ public class ChessBoarder {
 		MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
 		MyPieces[src.y][src.x] = null;
 		*/
-		presrc = src;
-		predest = des;
-		available = true;
-		prepiece = MyPieces[des.y][des.x];
+		if(!testeating)
+		{
+			presrc = src;
+			predest = des;
+			available = true;
+			prepiece = MyPieces[des.y][des.x];
+		}
 		if (MyPieces[src.y][src.x] == null){
 			//源位置没有棋子，移动失败
 			return false;
@@ -142,7 +147,7 @@ public class ChessBoarder {
 						}
 						MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
 						MyPieces[src.y][src.x] = null; 
-						
+						blackking.setLocation(des.x, des.y);
 						return true;
 					}
 					else{
@@ -166,6 +171,7 @@ public class ChessBoarder {
 						}
 						MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
 						MyPieces[src.y][src.x] = null; 
+						redking.setLocation(des.x, des.y);
 						return true;
 					}
 					else{
@@ -271,8 +277,12 @@ public class ChessBoarder {
 								//输出走子信息
 								ChineseChessMainFrame.InfBoard.AddLog("马" + StrPos[1][src.x] + (des.y < src.y ? "进" : "退") +StrPos[1][des.x] ) ;
 							}
-							MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
-							MyPieces[src.y][src.x] = null; 
+							if(!testeating)
+							{
+								MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
+								MyPieces[src.y][src.x] = null;
+							}
+							 
 							return true;
 						}
 						else{
@@ -289,8 +299,11 @@ public class ChessBoarder {
 								//输出走子信息
 								ChineseChessMainFrame.InfBoard.AddLog("马" + StrPos[1][src.x] + (des.y < src.y ? "进" : "退") +StrPos[1][des.x] ) ;
 							}
-							MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
-							MyPieces[src.y][src.x] = null; 
+							if(!testeating)
+							{
+								MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
+								MyPieces[src.y][src.x] = null; 
+							}
 							return true;
 						}
 						else{
@@ -321,9 +334,12 @@ public class ChessBoarder {
 								ChineseChessMainFrame.InfBoard.AddLog("车" + StrPos[0][src.x] + (des.y > src.y ? "进" : "退") + Math.abs(des.y - src.y)) ;
 							}
 						}
+						if(!testeating)
+						{
+							MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
+							MyPieces[src.y][src.x] = null; 
+						}
 						
-						MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
-						MyPieces[src.y][src.x] = null; 
 						return true;
 					}
 					else{
@@ -353,8 +369,12 @@ public class ChessBoarder {
 								ChineseChessMainFrame.InfBoard.AddLog("炮" + StrPos[0][src.x] + (des.y > src.y ? "进" : "退") + Math.abs(des.y - src.y)) ;
 							}
 						}
-						MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
-						MyPieces[src.y][src.x] = null; 
+						if(!testeating)
+						{
+							MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
+							MyPieces[src.y][src.x] = null; 
+						}
+						
 						return true;
 					}
 					else{
@@ -376,8 +396,12 @@ public class ChessBoarder {
 							else{
 								ChineseChessMainFrame.InfBoard.AddLog("卒" + StrPos[0][src.x] +"进" + 1) ;
 							}
-							MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
-							MyPieces[src.y][src.x] = null; 
+							if(!testeating)
+							{
+								MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
+								MyPieces[src.y][src.x] = null;
+							}
+							 
 							return true;
 						}
 						else{
@@ -387,8 +411,12 @@ public class ChessBoarder {
 					else{
 						if (des.x == src.x && Math.abs(des.y - src.y) == 1){
 							ChineseChessMainFrame.InfBoard.AddLog("卒" + StrPos[0][src.x] + "进" + 1) ;
-							MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
-							MyPieces[src.y][src.x] = null; 
+							if(!testeating)
+							{
+								MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
+								MyPieces[src.y][src.x] = null; 
+							}
+							
 							return true;
 						}
 						else{
@@ -411,8 +439,11 @@ public class ChessBoarder {
 							else{
 								ChineseChessMainFrame.InfBoard.AddLog("兵" + StrPos[1][src.x] +"进" + 1) ;
 							}
-							MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
-							MyPieces[src.y][src.x] = null; 
+							if(!testeating)
+							{
+								MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
+								MyPieces[src.y][src.x] = null; 
+							}
 							return true;
 						}
 						else{
@@ -422,8 +453,12 @@ public class ChessBoarder {
 					else{
 						if (des.x == src.x && Math.abs(des.y - src.y) == 1){
 							ChineseChessMainFrame.InfBoard.AddLog("兵" + StrPos[1][src.x] + "进" + 1) ;
-							MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
-							MyPieces[src.y][src.x] = null; 
+							if(!testeating)
+							{
+								MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
+								MyPieces[src.y][src.x] = null; 
+							}
+							
 							return true;
 						}
 						else{
@@ -477,8 +512,12 @@ public class ChessBoarder {
 								ChineseChessMainFrame.InfBoard.AddLog("炮" + StrPos[0][src.x] + (des.y > src.y ? "进" : "退") + Math.abs(des.y - src.y)) ;
 							}
 						}
-						MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
-						MyPieces[src.y][src.x] = null; 
+						if(!testeating)
+						{
+							MyPieces[des.y][des.x] = MyPieces[src.y][src.x];
+							MyPieces[src.y][src.x] = null; 
+						}
+						
 						return true;
 					}
 					else{
@@ -625,6 +664,33 @@ public class ChessBoarder {
 	}
 	public boolean jiangjun()
 	{
-		return true;
+		testeating = true;
+		Point p = new Point();
+		for (int i = 0;i <= 8;i ++){
+			for (int j = 0;j <=9;j ++){
+				p.setLocation(i, j);
+				if (MyPieces[j][i] != null){
+					if(MyPieces[j][i].name.charAt(0)=='黑')
+					{
+						if(PieceEat(p,redking))
+						{
+							testeating = false;
+							return true;
+						}
+					}
+					if(MyPieces[j][i].name.charAt(0)=='红')
+					{
+						if(PieceEat(p,blackking))
+						{
+							testeating = false;
+							return true;
+						}
+					}
+					
+				}
+			}
+		}
+		testeating = false;
+		return false;
 	}
 }

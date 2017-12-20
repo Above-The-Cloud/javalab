@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Audio.MP3;
@@ -22,6 +23,7 @@ import sql.*;
  */
 public class ChessPieceClick extends MouseAdapter {
 	UserInfo[] userInfo = new UserInfo[2];
+	public boolean jiangjun = false;
 	public ChessPieceClick(UserInfo[] userInfo)
 	{
 		this.userInfo = userInfo;
@@ -73,6 +75,7 @@ public class ChessPieceClick extends MouseAdapter {
 							if (ChineseChessMainFrame.MyBoarder.PieceMove(ChineseChessMainFrame.MyBoarder.p1, ChineseChessMainFrame.MyBoarder.p2) == true){
 								//棋子可以移动
 								DoPieceSound.play();
+								jiangjun = ChineseChessMainFrame.MyBoarder.jiangjun();
 								System.out.println("棋子可以移动");
 								char Winner = ChineseChessMainFrame.MyBoarder.Winner();
 								if (Winner == '红'){
@@ -115,6 +118,7 @@ public class ChessPieceClick extends MouseAdapter {
 									//棋子可以吃
 									DoPieceSound.play();
 									System.out.println("棋子可以吃");
+									jiangjun = ChineseChessMainFrame.MyBoarder.jiangjun();
 									char Winner = ChineseChessMainFrame.MyBoarder.Winner();
 									if (Winner == '红'){
 										WinSound.play();
@@ -147,6 +151,11 @@ public class ChessPieceClick extends MouseAdapter {
 		((ChessBoarderCanvas)arg0.getSource()).repaint();
 		((ChessBoarderCanvas)arg0.getSource()).paintImmediately(0, 0, ((ChessBoarderCanvas)arg0.getSource()).getWidth(), ((ChessBoarderCanvas)arg0.getSource()).getHeight());
 		System.out.println("repaint done");
+		if(jiangjun)
+		{
+			JOptionPane.showMessageDialog(null, "将军！"); 
+			jiangjun = false;
+		}
 	}
 	
 	/**
