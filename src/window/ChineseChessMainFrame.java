@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import Audio.MP3;
 import chessBoard.ChessBoarder;
 import defaultSet.DefaultSet;
 import window.LabelEvent.ChessPieceClick;
@@ -39,10 +40,9 @@ public class ChineseChessMainFrame extends JFrame {
 	}
 	private JPanel contentPane;
 	private JPanel Pane1;
-	private HomePanel Pane2;
-	private HomePanel Pane3;
+	public static HomePanel Pane2;
+	public static HomePanel Pane3;
 	private JPanel Pane4;
-	
 	static public InformationBoard InfBoard;
 	
 	/**
@@ -86,7 +86,7 @@ public class ChineseChessMainFrame extends JFrame {
 		//设置标题
 		this.setTitle("中国象棋");
 		//设置窗口大小
-		this.setBounds(0, 0, 1400, 800);
+		this.setBounds(0, 0, 1400, 870);
 		//设置窗口不可改变大小
 		this.setResizable(false);
 		//设置默认关闭
@@ -108,7 +108,7 @@ public class ChineseChessMainFrame extends JFrame {
 		//添加背景图片
 		JLabel BackGround = new JLabel("");
 		BackGround.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/bgd.jpg"))));
-		BackGround.setBounds(0, 0, 1400, 800);
+		BackGround.setBounds(0, 0, 1400, 870);
 		//添加背景图片的关键语句
 		this.getLayeredPane().add(BackGround, new Integer(Integer.MIN_VALUE)); 
 
@@ -118,7 +118,7 @@ public class ChineseChessMainFrame extends JFrame {
 		Pane3 = new HomePanel();
 		
 		//设置4个JPanel的位置和共同属性
-		Pane1.setBounds(0, 0, 1400, 800);
+		Pane1.setBounds(0, 0, 1400, 870);
 		Pane1.setOpaque(false);
 		Pane1.setVisible(true);
 		Pane1.setLayout(null);
@@ -209,8 +209,9 @@ public class ChineseChessMainFrame extends JFrame {
 				InfBoard.Clear();
 				InfBoard.AddLog("红方执子");
 				MyCanvas.SendWinner('无', userInfo);
-				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
 				record.clear();
+				ChessPieceClick.SwitchDoPlayer();
+				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
 			}
 		});
 		Pane1.add(AllReset);
@@ -230,18 +231,20 @@ public class ChineseChessMainFrame extends JFrame {
 		
 		//添加认输按钮
 		DiyButton WantLose = new DiyButton("Image\\ButtonLose(0).png","Image\\ButtonLose(1).png");
-		WantLose.setBounds(45, 666, 326, 115);
+		WantLose.setBounds(45, 710, 326, 115);
 		WantLose.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent arg0){
 				if(DoPlayer == '黑')
 				{
 					MyCanvas.SendWinner('红', userInfo);
+					DoPlayer = '无';
 				}
 					
 				else 
 				{
 					MyCanvas.SendWinner('黑', userInfo);
+					DoPlayer = '无';
 				}
 				MyCanvas.repaint();
 				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
@@ -253,11 +256,12 @@ public class ChineseChessMainFrame extends JFrame {
 		
 		//添加平局按钮
 		DiyButton WantEqual = new DiyButton("Image\\ButtonEqual(0).png","Image\\ButtonEqual(1).png");
-		WantEqual.setBounds(345, 666, 326, 115);
+		WantEqual.setBounds(345, 710, 326, 115);
 		WantEqual.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent arg0){
 				MyCanvas.SendWinner('二', userInfo);
+				DoPlayer = '无';
 				MyCanvas.repaint();
 				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
 				System.out.println("repaint done");
@@ -268,7 +272,7 @@ public class ChineseChessMainFrame extends JFrame {
 		
 		//添加悔棋按钮
 		DiyButton WantBack = new DiyButton("Image\\ButtonBack(0).png","Image\\ButtonBack(1).png");
-		WantBack.setBounds(645, 666, 326, 115);
+		WantBack.setBounds(645, 710, 326, 115);
 		WantBack.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent arg0){
@@ -308,6 +312,7 @@ public class ChineseChessMainFrame extends JFrame {
 	 */
 	public static void reDisplay()
 	{
+		
 		int n=JOptionPane.showConfirmDialog(null, "是否战局重播？","标题",JOptionPane.YES_NO_CANCEL_OPTION);
 		if(n==0)  //战局重播
 		{
@@ -316,7 +321,7 @@ public class ChineseChessMainFrame extends JFrame {
 			MyCanvas.SendWinner('无', userInfo);
 			MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -325,9 +330,11 @@ public class ChineseChessMainFrame extends JFrame {
 			{
 				ChineseChessMainFrame.MyBoarder.MyPieces[step.des.y][step.des.x] = ChineseChessMainFrame.MyBoarder.MyPieces[step.src.y][step.src.x];
 				ChineseChessMainFrame.MyBoarder.MyPieces[step.src.y][step.src.x] = null;
+				MP3 DoPieceSound = new MP3(ChineseChessMainFrame.class.getResource("/music/dopiece.wav").getPath().substring(1),false);
 				MyCanvas.repaint();
 				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
 				System.out.println("repaint done");
+				DoPieceSound.play();
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
@@ -335,9 +342,24 @@ public class ChineseChessMainFrame extends JFrame {
 					e.printStackTrace();
 				}
 			}
+			int t = JOptionPane.showConfirmDialog(null, "是否要重新开始", "重播结束",JOptionPane.YES_NO_CANCEL_OPTION);
+			if(t==0)
+			{
+				DataInit();
+				InfBoard.Clear();
+				InfBoard.AddLog("红方执子");
+				MyCanvas.SendWinner('无', userInfo);
+				MyCanvas.paintImmediately(0, 0, MyCanvas.getWidth(), MyCanvas.getHeight());
+				record.clear();
+			}
+			else{
+				
+			}
+			
 		}
 		else
 		{
+			
 			return ;
 		}
 	}

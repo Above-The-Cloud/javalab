@@ -34,7 +34,7 @@ public class ChineseChessApp extends JFrame
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); 
-		addBackgroundImage("imageLibary\\background.png");
+		addBackgroundImage("imageLibary\\background.jpg");
 		
 		JPanel contentPane = (JPanel)this.getContentPane();
 		
@@ -51,27 +51,27 @@ public class ChineseChessApp extends JFrame
 		
 		Menu1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("Image\\Menu1_0.png")));
 		Menu1.addMouseListener(this);		
-		Menu1.setBounds(460, 160,294,62);
+		Menu1.setBounds(470, 220,294,62);
 		contentPane.add(Menu1);
 		
 		Menu2.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("Image\\Menu2_0.png")));
 		Menu2.addMouseListener(this);		
-		Menu2.setBounds(460, 260,294,62);
-		contentPane.add(Menu2);
+		Menu2.setBounds(470, 220,294,62);
+		//contentPane.add(Menu2);
 		
 		Menu3.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("Image\\Menu3_0.png")));
 		Menu3.addMouseListener(this);		
-		Menu3.setBounds(460, 360,294,62);
+		Menu3.setBounds(470, 320,294,62);
 		contentPane.add(Menu3);
 		
 		Menu4.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("Image\\Menu4_0.png")));
 		Menu4.addMouseListener(this);		
-		Menu4.setBounds(460, 460,294,62);
+		Menu4.setBounds(470, 420,294,62);
 		contentPane.add(Menu4);
 		
 		Menu5.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("Image\\Menu5_0.png")));
 		Menu5.addMouseListener(this);		
-		Menu5.setBounds(460, 560,294,62);
+		Menu5.setBounds(470, 520,294,62);
 		contentPane.add(Menu5);
 	}
 	
@@ -185,10 +185,14 @@ public class ChineseChessApp extends JFrame
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+
 					ChineseChessApp frame = new ChineseChessApp();
+					LoadingFrame loadframe = new LoadingFrame();
+					loadframe.setVisible(true);
+						Thread.sleep(3000);
+					loadframe.dispose();
 					frame.setVisible(true);
-					MP3 BgMusic = new MP3(ChineseChessMainFrame.class.getResource("/music/bgm.mp3").getPath().substring(1));
+					MP3 BgMusic = new MP3(ChineseChessMainFrame.class.getResource("/music/bgm.wav").getPath().substring(1));
 					BgMusic.play();
 				} catch (Exception e) {
 					e.printStackTrace();

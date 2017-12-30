@@ -1,7 +1,16 @@
+
 package window;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.Toolkit;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -10,8 +19,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -32,7 +43,7 @@ public class SignUpFrame {
     JPanel jp2=new JPanel();
     JPanel jp5=new JPanel();
     JPanel bottomButton=new JPanel();  
-    JButton signUpButton=new JButton("注册"); 
+    JButton signUpButton=new JButton(new ImageIcon("Image\\register(1).png")); 
     
     JTextField userField1 = new JTextField(20);  
     JPasswordField passField1 = new JPasswordField(20);
@@ -46,25 +57,121 @@ public class SignUpFrame {
             }  
               
         }
-    	jf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    	jf.addWindowListener(new WindowAdapter() {
-    	public void windowClosing(WindowEvent e) {
-    		jf.dispose();
-    	}
-    	}); 
-        jp1.add(new Label("玩家  ："));  
-        jp1.add(userField1);  
-        jp2.add(new Label("密码  ："));  
-        jp2.add(passField1); 
-        bottomButton.add(signUpButton);  
-        jf.setLayout(new GridLayout(4,1,1,1));
-        jf.add(jp1);  
-        jf.add(jp2);
-        jf.add(jp5);
-        jf.add(bottomButton);  
-        jf.pack();  
-        jf.setVisible(true);  
-        jf.setLocation(600, 400);
+    	
+		jf.setIconImage(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/black-jiang.png")));
+		jf.setLayout(null);
+		jf.setBounds(0, 0, 762, 482);
+		System.out.println("sign up");
+		jf.setResizable(false);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.setLocationRelativeTo(null); 
+		addBackgroundImage("image//register_bgp.jpg");
+    	
+    	jf.addWindowListener(new myWindowListener());  
+    	JPanel contentPane = (JPanel)jf.getContentPane();
+    	contentPane.add(signUpButton);
+    	jf.setVisible(true); 
+    	
+        
+        userField1.setBounds(175, 90, 457, 60);
+        userField1.setFont(new Font("宋体", Font.PLAIN, 30));
+        userField1.setForeground(Color.gray);
+        userField1.setBorder(null);
+        userField1.setOpaque(false);
+        userField1.setText("用户名");
+        userField1.setToolTipText("用户名"); 
+        
+        userField1.addMouseListener(new MouseAdapter() {
+        	   @Override
+        	   public void mouseEntered(MouseEvent e) {
+        		   if("用户名".equalsIgnoreCase(userField1.getText())){
+        			   userField1.setText("");
+        		    }
+        	   }
+        	   
+        	   public void mouseExited(MouseEvent arg0){
+   				//设置图片为未选中状态
+        		   	if("".equals(userField1.getText().trim())){
+        		   		userField1.setText("用户名");
+        		    }
+   				}
+        	   
+        });
+        userField1.addFocusListener(new FocusListener (){
+        	@Override
+        	public void focusGained(FocusEvent e) {
+        		if("用户名".equalsIgnoreCase(userField1.getText())){
+        			userField1.setText("");
+        		}
+
+        	  }
+
+        	        @Override
+        	 public void focusLost(FocusEvent e) {
+                 if("".equals(userField1.getText()) ){
+                	 userField1.setText("用户名");
+       	          }
+        	  }
+
+          });
+    	contentPane.add(userField1);  
+    	
+        passField1.setBounds(175, 194, 457, 60);
+        passField1.setFont(new Font("宋体", Font.PLAIN, 30));
+        passField1.setForeground(Color.gray);
+        passField1.setBorder(null);
+        passField1.setOpaque(false);
+        passField1.setToolTipText("密码");  
+        passField1.setEchoChar((char)0);
+        passField1.setText("密码");
+        passField1.addMouseListener(new MouseAdapter() {
+     	   @Override
+     	   public void mouseEntered(MouseEvent e) {
+     		   if("密码".equalsIgnoreCase(passField1.getText())){
+     			  passField1.setText("");
+     			  passField1.setEchoChar('*');
+     		    }
+     	   }
+     	   
+     	   public void mouseExited(MouseEvent arg0){
+				//设置图片为未选中状态
+     		   	if("".equals(passField1.getText().trim())){
+     		   		passField1.setEchoChar((char)0);
+     		   		passField1.setText("密码");
+     		    }
+			}
+     });
+        
+        passField1.addFocusListener(new FocusListener (){
+        	@Override
+        	public void focusGained(FocusEvent e) {
+        		if("密码".equalsIgnoreCase(passField1.getText())){
+       			  passField1.setText("");
+       			  passField1.setEchoChar('*');
+       		    }
+
+        	  }
+
+        	        @Override
+        	 public void focusLost(FocusEvent e) {
+                 if("".equals(passField1.getText()) ){
+                	 passField1.setEchoChar((char)0);
+      		   		 passField1.setText("密码");
+       	          }
+        	  }
+
+          });
+        contentPane.add( passField1);  
+    	
+        signUpButton.setBounds(230, 310, 244, 60);
+        signUpButton.setRolloverIcon(new ImageIcon("Image\\register(2).png"));  
+        signUpButton.setPreferredSize(new Dimension(200,62));
+        signUpButton.setContentAreaFilled(false);
+        signUpButton.setOpaque(false);
+        signUpButton.setBorderPainted(false);
+        signUpButton.setFocusPainted(false);     
+    	contentPane.add(signUpButton); 
+    	
         signUpButton.addActionListener(e -> {  
         	System.out.println(userField1.getText() +"\t"+String.valueOf(passField1.getPassword())+"\t");  
         	try {
@@ -117,6 +224,23 @@ public class SignUpFrame {
                 e.printStackTrace();  
             }  
             return false;  
-        }  
+        }
+        
+        public void addBackgroundImage(String s)
+    	{  
+    	    //实例化一个ImageIcon图标类的对象  
+    	    ImageIcon image = new ImageIcon(s);  
+    	    //实例化一个标签类的对象  
+    	    JLabel background = new JLabel(image);   
+    	    //设置标签显示的位置和大小  
+    	    background.setBounds(0,0,image.getIconWidth(),image.getIconHeight());  
+    	    //将标签添加到窗体的第二层面板上  
+    	    jf.getLayeredPane().add(background,new Integer(Integer.MIN_VALUE));  
+    	    //获取窗体的第一层板对象  
+    	    JPanel contentPanel = (JPanel)jf.getContentPane();  
+    	    //设置第一层面板为透明  
+    	    contentPanel.setOpaque(false);  
+    	     
+    	}	
    
 }

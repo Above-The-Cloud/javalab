@@ -26,6 +26,7 @@ public class ChessPieceClick extends MouseAdapter {
 	UserInfo[] userInfo = new UserInfo[2];
 	public boolean jiangjun = false;
 	public boolean redisplay = false;
+	JLabel t;
 	public ChessPieceClick(UserInfo[] userInfo)
 	{
 		this.userInfo = userInfo;
@@ -77,6 +78,11 @@ public class ChessPieceClick extends MouseAdapter {
 							if (ChineseChessMainFrame.MyBoarder.PieceMove(ChineseChessMainFrame.MyBoarder.p1, ChineseChessMainFrame.MyBoarder.p2) == true){
 								//棋子可以移动
 								DoPieceSound.play();
+								t = new JLabel("");
+								t.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/"+ChineseChessMainFrame.MyBoarder.MyPieces[y][x].name.charAt(1)+".jpg"))));
+								t.setBounds(0, 0, 1400, 800);
+								ChineseChessMainFrame.MyCanvas.add(t);
+								ChineseChessMainFrame.MyCanvas.repaint();
 								jiangjun = ChineseChessMainFrame.MyBoarder.jiangjun();
 								MoveStep ms = new MoveStep(ChineseChessMainFrame.MyBoarder.p1, ChineseChessMainFrame.MyBoarder.p2);
 								ChineseChessMainFrame.recordAdd(ms);
@@ -123,6 +129,11 @@ public class ChessPieceClick extends MouseAdapter {
 								if (ChineseChessMainFrame.MyBoarder.PieceEat(ChineseChessMainFrame.MyBoarder.p1, ChineseChessMainFrame.MyBoarder.p2) == true){
 									//棋子可以吃
 									DoPieceSound.play();
+									t = new JLabel("");
+									t.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/"+ChineseChessMainFrame.MyBoarder.MyPieces[y][x].name.charAt(1)+".jpg"))));
+									t.setBounds(0, 0, 1400, 800);
+									ChineseChessMainFrame.MyCanvas.add(t);
+									ChineseChessMainFrame.MyCanvas.repaint();
 									System.out.println("棋子可以吃");
 									jiangjun = ChineseChessMainFrame.MyBoarder.jiangjun();
 									MoveStep ms = new MoveStep(ChineseChessMainFrame.MyBoarder.p1, ChineseChessMainFrame.MyBoarder.p2);
@@ -160,6 +171,15 @@ public class ChessPieceClick extends MouseAdapter {
 		}
 		((ChessBoarderCanvas)arg0.getSource()).repaint();
 		((ChessBoarderCanvas)arg0.getSource()).paintImmediately(0, 0, ((ChessBoarderCanvas)arg0.getSource()).getWidth(), ((ChessBoarderCanvas)arg0.getSource()).getHeight());
+		try {
+			Thread.sleep(800);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(t!=null)
+			{ChineseChessMainFrame.MyCanvas.remove(t);
+			ChineseChessMainFrame.MyCanvas.repaint();}
 		System.out.println("repaint done");
 		if(jiangjun)
 		{

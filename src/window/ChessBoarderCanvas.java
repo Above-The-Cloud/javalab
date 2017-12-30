@@ -34,7 +34,6 @@ public class ChessBoarderCanvas extends JPanel{
 	 * @param sx2背景图片的右下角坐标x
 	 * @param sy2背景图片的右下角坐标y
 	 * @return成功返回0
-	 * @author 孔胤栋
 	 * 时间：20141120
 	 */
 	public int SendData(ChessBoarder srcChess,Image srcImage,int sx1,int sy1,int sx2,int sy2){
@@ -112,12 +111,17 @@ public class ChessBoarderCanvas extends JPanel{
 		//绘制胜利图片
 		if (this.Winner == '红'){
 			g.drawImage(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/red-win.png")), 50, 270,559, 132, this);
-			
+			ChineseChessMainFrame.Pane2.repaint();
+			//ChineseChessMainFrame.Pane2.paintImmediately(0, 0, ChineseChessMainFrame.Pane2.getWidth(),ChineseChessMainFrame.Pane2.getHeight());
+			ChineseChessMainFrame.Pane3.repaint();
+			//ChineseChessMainFrame.Pane3.paintImmediately(0, 0, ChineseChessMainFrame.Pane3.getWidth(),ChineseChessMainFrame.Pane3.getHeight());
 			
 		}
 		else if (this.Winner == '黑'){	
 			g.drawImage(Toolkit.getDefaultToolkit().getImage(ChineseChessMainFrame.class.getResource("/imageLibary/black-win.png")), 50, 270,559, 132, this);
-			
+			ChineseChessMainFrame.Pane2.repaint();
+			//ChineseChessMainFrame.Pane2.paintImmediately(0, 0, ChineseChessMainFrame.Pane2.getWidth(),ChineseChessMainFrame.Pane2.getHeight());
+			ChineseChessMainFrame.Pane3.repaint();
 		}
 		else if (this.Winner == '二'){
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Image\\both-win.png"), 50, 270,559, 132, this);
